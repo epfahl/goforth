@@ -9,16 +9,18 @@ As of this writing, `goforth` is little more than a calculator. It supports only
 3. Run `go run .` in the project root.
 
 You should now see the prompt
-
 ```
 goforth>
 ```
+Type `^C` to exit the program.
 
-For an introduction to Forth, see [Starting Forth](https://www.forth.com/starting-forth/). Two very important things to understand about Forth are
-- it uses postfix notation, where an operation appears _after_ its arguments.
-- execution is performed on a last-in, first-out stack.
+For an introduction to Forth, see [Starting Forth](https://www.forth.com/starting-forth/).
 
-To add the numbers 1 and 2 and see the result, enter
+There are two very important things to understand about Forth when getting started:
+- Forth uses postfix notation, where an operator appears _after_ its arguments.
+- Execution is performed on a last-in, first-out stack.
+
+To add the numbers 1 and 2, and then see the result, enter
 
 ```
 goforth> 1 2 + .
@@ -33,12 +35,13 @@ In words, this line corresponds to 4 steps:
 
 Without the `.` at the end, you wouldn't see the result.
 
-A more complex arithmetic expression might look like
+Here's a more complex arithmetic expression):
 
 ```
 goforth> 1 2 + 4 * 6 / 1 - .
 1
 ```
+It might be helpful to work through this by hand to convince yourself you know what's going on.
 
 `goforth` also supports conditionals, but the results might look a little surprising:
 
@@ -47,7 +50,7 @@ goforth> 2 1 > .
 -1
 ```
 
-This isn't a typo. In Forth, the _true_ value is -1 and _false_ is 0. Here are two more examples:
+This isn't a typo. In Forth, the _true_ value is -1 and _false_ is 0 (yes, there is a [reason](https://en.wikipedia.org/wiki/Two%27s_complement) for this). Here are two more examples:
 
 ```
 goforth> 2 1 > 3 2 > and .
@@ -72,7 +75,7 @@ goforth> 2 10 4 - swap / .
 
 The most advanced feature in `goforth` is function definition. A function in Forth is called a "word." All of the operations encountered so far are built-in words. A new word is defined as `: <name> <body> ;`. When `:` is encountered, the program state is switched to compile mode. The `name` of the word is recorded in the program's environment for later use, and `body` holds other words and integers that define the new operation.
 
-Suppose we wanted to write a function that squares a number. It would look like this
+Suppose we wanted to write a function that squares a number. It would look like this:
 
 ```
 goforth> : square dup * ;

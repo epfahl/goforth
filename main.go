@@ -39,24 +39,6 @@ type State struct {
 	compileBuffer *CompileBuffer
 }
 
-// Note: `var` is needed for package-level variable declarations.
-var std = Env{
-	"+":     (*Stack).Add,
-	"-":     (*Stack).Subtract,
-	"*":     (*Stack).Multiply,
-	"/":     (*Stack).Divide,
-	">":     (*Stack).GreaterThan,
-	"<":     (*Stack).LessThan,
-	"=":     (*Stack).EqualTo,
-	"and":   (*Stack).And,
-	"or":    (*Stack).Or,
-	".":     (*Stack).Dot,
-	"dup":   (*Stack).Duplicate,
-	"swap":  (*Stack).Swap,
-	"true":  makePushInt(-1),
-	"false": makePushInt(0),
-}
-
 // Read an input from the prompt and return a slice of tokens.
 func read(prompt string) []string {
 	fmt.Print(prompt + " ")
@@ -163,6 +145,24 @@ func repl(prompt string, state *State) {
 		fmt.Println("operation failed")
 	}
 	repl(prompt, state)
+}
+
+// Define the standard library.
+//
+// Note: `var` is needed for package-level variable declarations.
+var std = Env{
+	"+":    (*Stack).Add,
+	"-":    (*Stack).Subtract,
+	"*":    (*Stack).Multiply,
+	"/":    (*Stack).Divide,
+	">":    (*Stack).GreaterThan,
+	"<":    (*Stack).LessThan,
+	"=":    (*Stack).EqualTo,
+	"and":  (*Stack).And,
+	"or":   (*Stack).Or,
+	".":    (*Stack).Dot,
+	"dup":  (*Stack).Duplicate,
+	"swap": (*Stack).Swap,
 }
 
 func main() {

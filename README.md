@@ -83,7 +83,7 @@ goforth> 4 square .
 16
 ```
 
-Once a word is defined, it can be used to define other words:
+Once a word is defined, it can be used to build other words:
 
 ```
 goforth> : forth-power square square ;
